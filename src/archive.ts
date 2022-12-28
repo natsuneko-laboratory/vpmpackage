@@ -4,10 +4,13 @@ import path from "path";
 
 import { isFileExists } from "./utils";
 
-const archiveAsZip = async (filepath: string): Promise<string> => {
+const archiveAsZip = async (
+  filepath: string,
+  name: string
+): Promise<string> => {
   const output = `${filepath}.zip`;
   const zip = new AdmZip();
-  zip.addLocalFolder(filepath);
+  zip.addLocalFolder(filepath, name);
 
   return new Promise((resolve, reject) => {
     zip.writeZip(output, (err) => {
@@ -32,7 +35,7 @@ const archive = async (args: {
 
   await promises.cp(dirname, vpmDist, { recursive: true });
 
-  const pkg = await archiveAsZip(vpmDist);
+  const pkg = await archiveAsZip(vpmDist, args.name);
   await promises.copyFile(pkg, args.dist);
 };
 
