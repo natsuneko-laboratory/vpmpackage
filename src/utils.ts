@@ -1,4 +1,4 @@
-import { promises } from "fs";
+import { promises } from "node:fs";
 
 const isFileExists = async (filepath: string): Promise<boolean> => {
   try {
@@ -8,5 +8,5 @@ const isFileExists = async (filepath: string): Promise<boolean> => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import-x/prefer-default-export
 export { isFileExists };

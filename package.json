@@ -7,6 +7,7 @@
   "repository": "https://github.com/natsuneko-laboratory/vpmpackage.git",
   "author": "Natsune Mochizuki <me@natsuneko.cat>",
   "license": "MIT",
+  "type": "module",
   "private": false,
   "scripts": {
     "prepublish": "npm run build",
@@ -18,21 +19,25 @@
     "fix:prettier": "prettier --write 'src/**/*.{ts,js}'"
   },
   "dependencies": {
-    "adm-zip": "^0.5.10",
-    "fs-extra": "^11.1.0"
+    "adm-zip": "^0.5.16",
+    "fs-extra": "^11.3.1"
   },
   "devDependencies": {
-    "@types/adm-zip": "^0.5.0",
-    "@types/fs-extra": "^9.0.13",
+    "@eslint/compat": "^1.3.2",
+    "@eslint/js": "^9.34.0",
+    "@stylistic/eslint-plugin": "^3.1.0",
+    "@types/adm-zip": "^0.5.7",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "@typescript-eslint/parser": "^5.47.1",
-    "eslint": "^8.30.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "prettier": "^2.8.1",
-    "typescript": "^4.9.4"
+    "eslint": "^9.34.0",
+    "eslint-config-airbnb-extended": "^2.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-n": "^17.21.3",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "typescript": "^4.9.4",
+    "typescript-eslint": "^8.42.0"
   }
 }
