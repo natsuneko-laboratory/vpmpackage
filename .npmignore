@@ -5,4 +5,4 @@ src/
 .eslintrc
 .gitignore
 tsconfig.json
-yarn.lock
+pnpm-lock.yaml
