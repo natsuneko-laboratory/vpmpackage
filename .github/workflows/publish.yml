@@ -26,4 +26,7 @@ jobs:
 
       - run: pnpm install
       - run: pnpm run build
+
+      - name: Update npm
+        run: npm install -g npm@latest
       - run: npm publish
