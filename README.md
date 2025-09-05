@@ -4,12 +4,15 @@ Create a VPMPackage from Node.js, written in TypeScript. No platform dependency.
 
 ## Requirements
 
-- Node.js >= 16
+- Node.js >= 22
 
 ## Install
 
 ```bash
+# one of
+$ npm install @natsuneko-laboratory/vpmpackage
 $ yarn add @natsuneko-laboratory/vpmpackage
+$ pnpm add @natsuneko-laboratory/vpmpackage
 ```
 
 ## Usage
@@ -28,10 +31,10 @@ await archive({
 
 ```bash
 # prepare
-$ yarn install
+$ pnpm install
 
 # publish
-$ npm publish --access public
+# → automated by GitHub Actions
 ```
 
 ## License
