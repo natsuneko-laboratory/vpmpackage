@@ -1,12 +1,13 @@
+import path from "node:path";
+
 import AdmZip from "adm-zip";
 import { promises } from "fs-extra";
-import path from "path";
 
 import { isFileExists } from "./utils";
 
 const archiveAsZip = async (
   filepath: string,
-  name: string
+  name: string,
 ): Promise<string> => {
   const output = `${filepath}.zip`;
   const zip = new AdmZip();
@@ -14,7 +15,9 @@ const archiveAsZip = async (
 
   return new Promise((resolve, reject) => {
     zip.writeZip(output, (err) => {
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       if (err) return reject(err);
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       return resolve(output);
     });
   });
@@ -39,5 +42,5 @@ const archive = async (args: {
   await promises.copyFile(pkg, args.dist);
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import-x/prefer-default-export
 export { archive };
