@@ -7,7 +7,7 @@ import { isFileExists } from "./utils";
 
 const archiveAsZip = async (
   filepath: string,
-  name: string,
+  name: string
 ): Promise<string> => {
   const output = `${filepath}.zip`;
   const zip = new AdmZip();

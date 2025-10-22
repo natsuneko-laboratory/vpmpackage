@@ -1,8 +1,8 @@
-import { promises } from "node:fs";
+import { lstat } from "node:fs/promises";
 
 const isFileExists = async (filepath: string): Promise<boolean> => {
   try {
-    return (await promises.lstat(filepath)).isFile();
+    return (await lstat(filepath)).isFile();
   } catch (e) {
     return false;
   }

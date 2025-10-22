@@ -1,6 +1,6 @@
 {
   "name": "@natsuneko-laboratory/vpmpackage",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Operate VPMPackage from Node.js. No platform dependency. No additional instructions.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,10 @@
   "private": false,
   "scripts": {
     "prepublish": "npm run build",
-    "build": "tsc",
+    "build": "tsc && npm run build:vite && npm run build:tsc",
+    "build:vite": "vite build",
+    "build:tsc": "rm -f tsconfig.types.tsbuildinfo && tsc --project ./tsconfig.types.json",
+    "build:esm": "npx tsx node_modules/@natsuneko-laboratory/kiana/bin/esm-exports.ts --pattern **/{archive,extract}.mjs --entrypoint dist/index.mjs",
     "prepare": "npm run build",
     "lint:eslint": "eslint --ext 'src/**/*.{ts,js}'",
     "lint:prettier": "prettier --check 'src/**/*.{ts,js}'",
@@ -23,21 +26,12 @@
     "fs-extra": "^11.3.1"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.3.2",
-    "@eslint/js": "^9.34.0",
-    "@stylistic/eslint-plugin": "^3.1.0",
+    "@biomejs/biome": "^2.2.7",
+    "@natsuneko-laboratory/kiana": "^1.1.0",
     "@types/adm-zip": "^0.5.7",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^18.11.18",
-    "eslint": "^9.34.0",
-    "eslint-config-airbnb-extended": "^2.2.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import-x": "^4.16.1",
-    "eslint-plugin-n": "^17.21.3",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2",
-    "typescript": "^4.9.4",
-    "typescript-eslint": "^8.42.0"
+    "typescript": "^5.9.2",
+    "vite": "^7.1.11"
   }
 }
