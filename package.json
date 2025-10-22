@@ -1,18 +1,18 @@
 {
   "name": "@natsuneko-laboratory/vpmpackage",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Operate VPMPackage from Node.js. No platform dependency. No additional instructions.",
-  "main": "dist/index.cjs",
+  "main": "dist/index.cjs.cjs",
   "types": "./dist/index.d.ts",
   "repository": "https://github.com/natsuneko-laboratory/vpmpackage.git",
   "author": "Natsune Mochizuki <me@natsuneko.cat>",
   "license": "MIT",
   "type": "module",
   "private": false,
-    "exports": {
+  "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.cjs"
     }
   },
   "scripts": {
