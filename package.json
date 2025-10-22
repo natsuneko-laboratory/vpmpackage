@@ -1,20 +1,26 @@
 {
   "name": "@natsuneko-laboratory/vpmpackage",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Operate VPMPackage from Node.js. No platform dependency. No additional instructions.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "repository": "https://github.com/natsuneko-laboratory/vpmpackage.git",
   "author": "Natsune Mochizuki <me@natsuneko.cat>",
   "license": "MIT",
   "type": "module",
   "private": false,
+    "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc && npm run build:vite && npm run build:tsc",
     "build:vite": "vite build",
     "build:tsc": "rm -f tsconfig.types.tsbuildinfo && tsc --project ./tsconfig.types.json",
-    "build:esm": "npx tsx node_modules/@natsuneko-laboratory/kiana/bin/esm-exports.ts --pattern **/{archive,extract}.mjs --entrypoint dist/index.mjs",
+    "build:esm": "npx tsx node_modules/@natsuneko-laboratory/kiana/bin/esm-exports.ts --pattern **/{archive}.mjs --entrypoint dist/index.mjs",
     "prepare": "npm run build",
     "lint:eslint": "eslint --ext 'src/**/*.{ts,js}'",
     "lint:prettier": "prettier --check 'src/**/*.{ts,js}'",
