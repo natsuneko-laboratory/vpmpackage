@@ -4,7 +4,7 @@ Create a VPMPackage from Node.js, written in TypeScript. No platform dependency.
 
 ## Requirements
 
-- Node.js >= 22
+- Node.js >= 24
 
 ## Install
 
