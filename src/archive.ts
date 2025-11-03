@@ -3,12 +3,12 @@ import path from "node:path";
 import AdmZip from "adm-zip";
 import { promises } from "fs-extra";
 
-import { isFileExists, lsRecursive } from "./utils";
+import { isFileExists, getDirectoryFiles } from "./utils";
 
 const archiveAsZip = async (filepath: string): Promise<string> => {
   const output = `${filepath}.zip`;
   const zip = new AdmZip();
-  const files = await lsRecursive(filepath);
+  const files = await getDirectoryFiles({ root: filepath });
   for (const file of files) {
     const relativePath = path.relative(filepath, file);
     zip.addLocalFile(file, path.dirname(relativePath));
@@ -43,5 +43,12 @@ const archive = async (args: {
   await promises.copyFile(pkg, args.dist);
 };
 
-// eslint-disable-next-line import-x/prefer-default-export
-export { archive };
+const extract = async (args: {
+  archive: string;
+  dist: string;
+}): Promise<void> => {
+  const zip = new AdmZip(args.archive);
+  zip.extractAllTo(args.dist, true);
+};
+
+export { archive, extract };

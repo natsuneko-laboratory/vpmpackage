@@ -1,24 +1,68 @@
-import { lstat, readdir } from "node:fs/promises";
-import path from "node:path";
+import { lstat, mkdtemp, readdir, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
-const isFileExists = async (filepath: string): Promise<boolean> => {
+import normalize from "normalize-path";
+
+type TempDirectory = {
+  path: string;
+  dispose: () => Promise<void>;
+};
+
+const createTempDirectory = async (): Promise<TempDirectory> => {
+  const dir = await mkdtemp(join(tmpdir(), "unitypackage-"));
+  const dispose = async () => {
+    await rm(dir, { recursive: true });
+  };
+
+  return { path: dir, dispose };
+};
+
+const getDirectoryFiles = async ({
+  root,
+}: {
+  root: string;
+}): Promise<string[]> => {
+  const entries = await readdir(root, { withFileTypes: true, recursive: true });
+  return entries
+    .filter((w) => w.isFile())
+    .map((w) => normalize(join(w.parentPath, w.name)));
+};
+
+const getDirectories = async ({
+  root,
+}: {
+  root: string;
+}): Promise<string[]> => {
+  const entries = await readdir(root, {
+    withFileTypes: true,
+    recursive: false,
+  });
+  return entries
+    .filter((w) => w.isDirectory())
+    .map((w) => normalize(join(w.parentPath, w.name)));
+};
+
+const isFileExists = async (path: string): Promise<boolean> => {
   try {
-    return (await lstat(filepath)).isFile();
-  } catch (e) {
+    return (await lstat(path)).isFile();
+  } catch {
     return false;
   }
 };
 
-const lsRecursive = async (dir: string): Promise<string[]> => {
-  return await readdir(dir, { withFileTypes: true }).then((entries) => {
-    const files = entries.map((entry) => {
-      const res = path.resolve(dir, entry.name);
-      return entry.isDirectory() ? lsRecursive(res) : [res];
-    });
-
-    return Array.prototype.concat(...files);
-  });
+const isDirectoryExists = async (path: string): Promise<boolean> => {
+  try {
+    return (await lstat(path)).isDirectory();
+  } catch {
+    return false;
+  }
 };
 
-// eslint-disable-next-line import-x/prefer-default-export
-export { isFileExists, lsRecursive };
+export {
+  createTempDirectory,
+  getDirectories,
+  getDirectoryFiles,
+  isFileExists,
+  isDirectoryExists,
+};
