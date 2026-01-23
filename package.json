@@ -34,7 +34,7 @@
     "normalize-path": "^3.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.7",
+    "@biomejs/biome": "^2.3.11",
     "@natsuneko-laboratory/kiana": "^1.1.0",
     "@types/adm-zip": "^0.5.7",
     "@types/fs-extra": "^11.0.4",
